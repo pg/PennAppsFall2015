@@ -1,0 +1,14 @@
+[Unit]
+Description=Bluetooth SPP and PIN service
+Requires=bluetooth.target
+After=bluetooth.target
+
+[Service]
+Type=idle
+RemainAfterExit=true
+ExecStart=/home/root/bluetooth/bluetooth-spp-pin.sh
+Environment="HOME=/home/root/bluetooth"
+WorkingDirectory=/home/root/bluetooth/
+
+[Install]                               
+WantedBy=multi-user.target
