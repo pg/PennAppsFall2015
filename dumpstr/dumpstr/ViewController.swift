@@ -11,8 +11,11 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet
+    weak var trashStatusLabel: UITextField!
+    
+    @IBOutlet
     var tableView: UITableView?
-    var items: [String] = ["Sep 1, 2015, 10:00 AM", "Aug 23, 2015, 3:00 PM", "Aug 14, 2015, 12:00 PM"]
+    var items: [String] = ["September 1, 2015 at 10:00 AM", "August 23, 2015 at 3:00 PM", "August 14, 2015 at 12:00 PM", "August 7, 2015 at 6:00 PM", "July 30, 2015 at 1:00 PM", "July 24, 2015 at 9:00 AM", "July 18, 2015 at 2:00 PM", "July 10, 2015 at 11:00 AM", "July 1, 2015 at 8:00AM"]
     
     
     override func viewDidLoad() {
@@ -20,9 +23,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
-        // if we need to take out the trash
-        let timeStamp = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+        self.trashStatusLabel.layer.borderWidth = 1.5
+        //if we need to take out the trash
+        self.trashStatusLabel.text = "🚮 Take Out the Trash! 🚮"
+        
+        let timeStamp = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .LongStyle, timeStyle: .ShortStyle)
         items.insert(timeStamp, atIndex: 0)
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
