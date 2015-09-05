@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
+    // Connect the text field and table view components
     @IBOutlet
     weak var trashStatusLabel: UITextField!
     
