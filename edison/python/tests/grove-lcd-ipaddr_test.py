@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright (c) 2015 Max Vilimpoc§
+# Copyright (c) 2015 Max Vilimpoc
 #
 # References:
 # http://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-of-eth0-in-python
@@ -49,7 +49,7 @@ myLcd = lcd.Jhd1313m1(0, 0x3E, 0x62)
 myLcd.clear()
 
 # Green
-myLcd.setColor(255, 255, 0)
+myLcd.setColor(100, 200, 255)
 
 # Zero the cursor
 myLcd.setCursor(0,0)
