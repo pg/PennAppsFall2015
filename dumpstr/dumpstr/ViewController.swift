@@ -16,15 +16,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet
     var tableView: UITableView?
-   // var items: [String] = ["September 1, 2015 at 10:00 AM", "August 23, 2015 at 3:00 PM", "August 14, 2015 at 12:00 PM", "August 7, 2015 at 6:00 PM", "July 30, 2015 at 1:00 PM", "July 24, 2015 at 9:00 AM", "July 18, 2015 at 2:00 PM", "July 10, 2015 at 11:00 AM", "July 1, 2015 at 8:00AM"]
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        sharedBluetoothConnector.getFull(callback: addDate())
+        
         self.tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         self.trashStatusLabel.layer.borderWidth = 1.5
+        
+    }
+    
+    func addDate() {
         //if we need to take out the trash
         self.trashStatusLabel.text = "🚮 Take Out the Trash! 🚮"
         
@@ -32,14 +36,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let defaults = NSUserDefaults.standardUserDefaults()
         if var dateArray = defaults.arrayForKey("PennAppsKey") {
- //           dateArray.insert(timeStamp, atIndex: 0)
- //           defaults.setObject(dateArray, forKey: "PennAppsKey")
+            dateArray.insert(timeStamp, atIndex: 0)
+            defaults.setObject(dateArray, forKey: "PennAppsKey")
         } else {
-    //        let dateArray = [timeStamp]
-  //          defaults.setObject(dateArray, forKey: "PennAppsKey")
-            
+            let dateArray = [timeStamp]
+            defaults.setObject(dateArray, forKey: "PennAppsKey")
         }
-        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

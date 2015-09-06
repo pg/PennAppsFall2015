@@ -15,6 +15,7 @@
 		B54AF1921B9AA48800C00A1C /* dumpstrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AF1911B9AA48800C00A1C /* dumpstrTests.swift */; };
 		B54AF19D1B9AA48800C00A1C /* dumpstrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AF19C1B9AA48800C00A1C /* dumpstrUITests.swift */; };
 		B54AF1AD1B9AAE3600C00A1C /* logo.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B54AF1AC1B9AAE3600C00A1C /* logo.PNG */; settings = {ASSET_TAGS = (); }; };
+		B5E304E41B9BF706002EFEDD /* BluetoothConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E304E31B9BF706002EFEDD /* BluetoothConnector.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		B54AF19C1B9AA48800C00A1C /* dumpstrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dumpstrUITests.swift; sourceTree = "<group>"; };
 		B54AF19E1B9AA48800C00A1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B54AF1AC1B9AAE3600C00A1C /* logo.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.PNG; path = ../../../../logo.PNG; sourceTree = "<group>"; };
+		B5E304E31B9BF706002EFEDD /* BluetoothConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BluetoothConnector.swift; path = ../../../../../../Downloads/BluetoothConnector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		B54AF17B1B9AA48800C00A1C /* dumpstr */ = {
 			isa = PBXGroup;
 			children = (
+				B5E304E31B9BF706002EFEDD /* BluetoothConnector.swift */,
 				B54AF1AC1B9AAE3600C00A1C /* logo.PNG */,
 				B54AF17C1B9AA48800C00A1C /* AppDelegate.swift */,
 				B54AF17E1B9AA48800C00A1C /* ViewController.swift */,
@@ -260,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5E304E41B9BF706002EFEDD /* BluetoothConnector.swift in Sources */,
 				B54AF17F1B9AA48800C00A1C /* ViewController.swift in Sources */,
 				B54AF17D1B9AA48800C00A1C /* AppDelegate.swift in Sources */,
 			);
