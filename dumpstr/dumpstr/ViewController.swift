@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet
     var tableView: UITableView?
-    var items: [String] = ["September 1, 2015 at 10:00 AM", "August 23, 2015 at 3:00 PM", "August 14, 2015 at 12:00 PM", "August 7, 2015 at 6:00 PM", "July 30, 2015 at 1:00 PM", "July 24, 2015 at 9:00 AM", "July 18, 2015 at 2:00 PM", "July 10, 2015 at 11:00 AM", "July 1, 2015 at 8:00AM"]
+   // var items: [String] = ["September 1, 2015 at 10:00 AM", "August 23, 2015 at 3:00 PM", "August 14, 2015 at 12:00 PM", "August 7, 2015 at 6:00 PM", "July 30, 2015 at 1:00 PM", "July 24, 2015 at 9:00 AM", "July 18, 2015 at 2:00 PM", "July 10, 2015 at 11:00 AM", "July 1, 2015 at 8:00AM"]
     
     
     override func viewDidLoad() {
@@ -29,19 +29,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.trashStatusLabel.text = "🚮 Take Out the Trash! 🚮"
         
         let timeStamp = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .LongStyle, timeStyle: .ShortStyle)
-        items.insert(timeStamp, atIndex: 0)
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if var dateArray = defaults.arrayForKey("PennAppsKey") {
+ //           dateArray.insert(timeStamp, atIndex: 0)
+ //           defaults.setObject(dateArray, forKey: "PennAppsKey")
+        } else {
+    //        let dateArray = [timeStamp]
+  //          defaults.setObject(dateArray, forKey: "PennAppsKey")
+            
+        }
         
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count;
+        return NSUserDefaults.standardUserDefaults().arrayForKey("PennAppsKey")!.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UITableViewCell = self.tableView!.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         
-        cell.textLabel?.text = self.items[indexPath.row]
+        cell.textLabel?.text = NSUserDefaults.standardUserDefaults().arrayForKey("PennAppsKey")![indexPath.row] as? String
         
         return cell
     }
