@@ -229,9 +229,9 @@ void loop(void)
      /* if calculated average is below the threshold, turn on the LED and output signal high to edison */
      digitalWrite(LEDPIN, HIGH);
      Serial.print("[Send] ");
-     Serial.println("Your dumpstr is getting full!");
+     Serial.println("full");
      ble.print("AT+BLEUARTTX=");
-     ble.println("Your dumpstr is getting full!");
+     ble.println("full");
      
    }
    
