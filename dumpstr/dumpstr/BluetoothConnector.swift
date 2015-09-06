@@ -17,12 +17,11 @@ class BluetoothConnector: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
     private var isFull: Bool = false
     private var centralManager: CBCentralManager?
     private var peripheralADA: CBPeripheral?
-    private var callback: () -> Void?
+    var delegate: BluetoothConnectorProtocol?
     
     override init() {
         super.init()
         let centralQueue = dispatch_queue_create("com.raywenderlich", DISPATCH_QUEUE_SERIAL)
-        callback = () -> Void {return}
         centralManager = CBCentralManager(delegate: self, queue: centralQueue)
     }
     
@@ -30,12 +29,12 @@ class BluetoothConnector: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
         
     }
     
-    func getFull(callback: () -> Void?) {
+    func getFull() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             print("Scanning for peripherals with services...")
             self.centralManager!.scanForPeripheralsWithServices([ADAServiceUUID], options: nil)
             print("Scan begun")
-            self.callback = callback
+            self.delegate?.addDate()
         }
 
     }
@@ -78,11 +77,12 @@ class BluetoothConnector: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
         let someString = NSString(data: data!, encoding: NSASCIIStringEncoding)
         if (someString == "full") != isFull {
             isFull = !isFull
-            self.callback()
+            delegate?.addDate()
         }
     }
     
-    
+}
 
-    
+protocol BluetoothConnectorProtocol {
+    func addDate()
 }

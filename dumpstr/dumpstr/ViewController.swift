@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, BluetoothConnectorProtocol{
 
     // Connect the text field and table view components
     @IBOutlet
@@ -18,17 +18,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var tableView: UITableView?
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        sharedBluetoothConnector.delegate = self
+        sharedBluetoothConnector.getFull()
         
-        sharedBluetoothConnector.getFull(callback: addDate())
+        super.viewDidLoad()
         
         self.tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         self.trashStatusLabel.layer.borderWidth = 1.5
-        
+
     }
     
-    func addDate() {
+    func addDate(){
         //if we need to take out the trash
         self.trashStatusLabel.text = "🚮 Take Out the Trash! 🚮"
         
@@ -42,6 +43,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let dateArray = [timeStamp]
             defaults.setObject(dateArray, forKey: "PennAppsKey")
         }
+        tableView?.reloadData()
+    }
+    
+    func redButton() {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("PennAppsKey")
+        tableView?.reloadData()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

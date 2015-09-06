@@ -14,8 +14,8 @@
 		B54AF1871B9AA48800C00A1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54AF1851B9AA48800C00A1C /* LaunchScreen.storyboard */; };
 		B54AF1921B9AA48800C00A1C /* dumpstrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AF1911B9AA48800C00A1C /* dumpstrTests.swift */; };
 		B54AF19D1B9AA48800C00A1C /* dumpstrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AF19C1B9AA48800C00A1C /* dumpstrUITests.swift */; };
-		B54AF1AD1B9AAE3600C00A1C /* logo.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B54AF1AC1B9AAE3600C00A1C /* logo.PNG */; settings = {ASSET_TAGS = (); }; };
-		B5E304E41B9BF706002EFEDD /* BluetoothConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E304E31B9BF706002EFEDD /* BluetoothConnector.swift */; settings = {ASSET_TAGS = (); }; };
+		FC513E181B9BFF0F002B3E12 /* BluetoothConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC513E171B9BFF0F002B3E12 /* BluetoothConnector.swift */; settings = {ASSET_TAGS = (); }; };
+		FC513E1A1B9C02BB002B3E12 /* logo.PNG in Resources */ = {isa = PBXBuildFile; fileRef = FC513E191B9C02BB002B3E12 /* logo.PNG */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +49,8 @@
 		B54AF1981B9AA48800C00A1C /* dumpstrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dumpstrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54AF19C1B9AA48800C00A1C /* dumpstrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dumpstrUITests.swift; sourceTree = "<group>"; };
 		B54AF19E1B9AA48800C00A1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B54AF1AC1B9AAE3600C00A1C /* logo.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.PNG; path = ../../../../logo.PNG; sourceTree = "<group>"; };
-		B5E304E31B9BF706002EFEDD /* BluetoothConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BluetoothConnector.swift; path = ../../../../../../Downloads/BluetoothConnector.swift; sourceTree = "<group>"; };
+		FC513E171B9BFF0F002B3E12 /* BluetoothConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothConnector.swift; sourceTree = "<group>"; };
+		FC513E191B9C02BB002B3E12 /* logo.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.PNG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +101,9 @@
 		B54AF17B1B9AA48800C00A1C /* dumpstr */ = {
 			isa = PBXGroup;
 			children = (
-				B5E304E31B9BF706002EFEDD /* BluetoothConnector.swift */,
-				B54AF1AC1B9AAE3600C00A1C /* logo.PNG */,
+				FC513E171B9BFF0F002B3E12 /* BluetoothConnector.swift */,
 				B54AF17C1B9AA48800C00A1C /* AppDelegate.swift */,
+				FC513E191B9C02BB002B3E12 /* logo.PNG */,
 				B54AF17E1B9AA48800C00A1C /* ViewController.swift */,
 				B54AF1801B9AA48800C00A1C /* Main.storyboard */,
 				B54AF1831B9AA48800C00A1C /* Assets.xcassets */,
@@ -198,7 +198,7 @@
 				TargetAttributes = {
 					B54AF1781B9AA48800C00A1C = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = YTQY3R8TCX;
+						DevelopmentTeam = 43VP2ZZXME;
 					};
 					B54AF18C1B9AA48800C00A1C = {
 						CreatedOnToolsVersion = 7.0;
@@ -235,9 +235,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC513E1A1B9C02BB002B3E12 /* logo.PNG in Resources */,
 				B54AF1871B9AA48800C00A1C /* LaunchScreen.storyboard in Resources */,
 				B54AF1841B9AA48800C00A1C /* Assets.xcassets in Resources */,
-				B54AF1AD1B9AAE3600C00A1C /* logo.PNG in Resources */,
 				B54AF1821B9AA48800C00A1C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,7 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5E304E41B9BF706002EFEDD /* BluetoothConnector.swift in Sources */,
+				FC513E181B9BFF0F002B3E12 /* BluetoothConnector.swift in Sources */,
 				B54AF17F1B9AA48800C00A1C /* ViewController.swift in Sources */,
 				B54AF17D1B9AA48800C00A1C /* AppDelegate.swift in Sources */,
 			);
@@ -412,7 +412,7 @@
 				INFOPLIST_FILE = dumpstr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.dumpstr;
+				PRODUCT_BUNDLE_IDENTIFIER = austinwu.Dumpster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -427,7 +427,7 @@
 				INFOPLIST_FILE = dumpstr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.dumpstr;
+				PRODUCT_BUNDLE_IDENTIFIER = austinwu.Dumpster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
