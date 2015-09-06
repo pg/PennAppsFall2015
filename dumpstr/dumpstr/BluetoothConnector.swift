@@ -34,7 +34,6 @@ class BluetoothConnector: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
             print("Scanning for peripherals with services...")
             self.centralManager!.scanForPeripheralsWithServices([ADAServiceUUID], options: nil)
             print("Scan begun")
-            self.delegate?.addDate()
         }
 
     }
@@ -72,10 +71,10 @@ class BluetoothConnector: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic,error: NSError?){
-        print("value changing")
         let data = characteristic.value
         let someString = NSString(data: data!, encoding: NSASCIIStringEncoding)
         if (someString == "full") != isFull {
+            print(someString)
             isFull = !isFull
             delegate?.addDate()
         }

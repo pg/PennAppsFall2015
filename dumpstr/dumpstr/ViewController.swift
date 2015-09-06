@@ -26,29 +26,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         self.trashStatusLabel.layer.borderWidth = 1.5
-
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if defaults.arrayForKey("PennAppsKey") == nil {
+            let dateArray = []
+            defaults.setObject(dateArray, forKey: "PennAppsKey")
+        }
     }
     
     func addDate(){
         //if we need to take out the trash
-        self.trashStatusLabel.text = "🚮 Take Out the Trash! 🚮"
-        
-        let timeStamp = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .LongStyle, timeStyle: .ShortStyle)
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if var dateArray = defaults.arrayForKey("PennAppsKey") {
-            dateArray.insert(timeStamp, atIndex: 0)
-            defaults.setObject(dateArray, forKey: "PennAppsKey")
-        } else {
-            let dateArray = [timeStamp]
-            defaults.setObject(dateArray, forKey: "PennAppsKey")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.trashStatusLabel.text = "🚮 Take Out the Trash! 🚮"
+            let timeStamp = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .LongStyle, timeStyle: .ShortStyle)
+            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            if var dateArray = defaults.arrayForKey("PennAppsKey") {
+                dateArray.insert(timeStamp, atIndex: 0)
+                defaults.setObject(dateArray, forKey: "PennAppsKey")
+            } else {
+                let dateArray = [timeStamp]
+                defaults.setObject(dateArray, forKey: "PennAppsKey")
+            }
+            self.tableView?.reloadData()
         }
-        tableView?.reloadData()
-    }
-    
-    func redButton() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("PennAppsKey")
-        tableView?.reloadData()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
