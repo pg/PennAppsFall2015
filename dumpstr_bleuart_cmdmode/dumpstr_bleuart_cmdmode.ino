@@ -1,10 +1,18 @@
 /*********************************************************************
- This sketch originates from the bleuart_cmdmode sketch for adafruit nRF51822 based Bluefruit LE modules.
- Modified by Dumpstr for PennApps Fall 2015 here: https://github.com/pgebhard/PennAppsFall2015 on 04 to 06 Sep 2015
+ This is an example for our nRF51822 based Bluefruit LE modules
+
+ Pick one up today in the adafruit shop!
+
+ Adafruit invests time and resources providing this open source code,
+ please support Adafruit and open-source hardware by purchasing
+ products from Adafruit!
 
  MIT license, check LICENSE for more information
  All text above, and the splash screen below must be included in
  any redistribution
+ 
+ This sketch originates from the bleuart_cmdmode sketch for adafruit nRF51822 based Bluefruit LE modules at https://github.com/adafruit/Adafruit_BluefruitLE_nRF51
+ Modified by Dumpstr for PennApps Fall 2015 here: https://github.com/pgebhard/PennAppsFall2015 on 04 to 06 Sep 2015
  
  Aduino Uno reads HC-SR04 distance sensor and sends a message over bluetooth to the dumpstr iOS app.
  
@@ -72,6 +80,21 @@
     #define MINIMUM_FIRMWARE_VERSION    "0.6.6"
     #define MODE_LED_BEHAVIOUR          "MODE"
 /*=========================================================================*/
+
+#define ECHOPIN              2 // HC-SR04 Echo Pin
+#define TRIGPIN              4 // HC-SR04 Trigger Pin
+#define LEDPIN              13 // Onboard LED
+#define outputLimit         10 // limit to trigger output 
+
+const int numReadings = 40; // with 50ms delays between readings, will detect objects within 2 seconds
+
+int maximumRange = 200;        // Maximum range needed
+int minimumRange = 0;          // Minimum range needed
+long duration, distance;       // Duration used to calculate distance
+int readings[numReadings];     // the readings from the sensor input
+int index = 0;                 // the index of the current reading
+int total = 0;                 // the running total
+int average = 0;               // the average
 
 /* Create the bluefruit object using hardware SPI, using SCK/MOSI/MISO hardware SPI pins and then user selected CS/IRQ/RST */
 Adafruit_BluefruitLE_SPI ble(BLUEFRUIT_SPI_CS, BLUEFRUIT_SPI_IRQ, BLUEFRUIT_SPI_RST);
@@ -142,6 +165,16 @@ void setup(void)
     ble.sendCommandCheckOK("AT+HWModeLED=" MODE_LED_BEHAVIOUR);
     Serial.println(F("******************************"));
   }
+  
+  // initialize all the sensor readings to 0: 
+  for (int thisReading = 0; thisReading < numReadings; thisReading++) {
+    readings[thisReading] = 0; Serial.println("init to 0");
+  }
+  
+  pinMode(TRIGPIN, OUTPUT);
+  pinMode(ECHOPIN, INPUT);
+  pinMode(LEDPIN, OUTPUT); // Use LED indicator (if required)
+
 }
 
 /**************************************************************************/
@@ -151,14 +184,73 @@ void setup(void)
 /**************************************************************************/
 void loop(void)
 {
-  // Check for user input
-  char inputs[BUFSIZE+1];
-  
-  // #added test msg every 1 second
+  /* The following TRIGPIN/ECHOPIN cycle is used to determine the
+ distance of the nearest object by bouncing soundwaves off of it. */ 
+ 
+ digitalWrite(TRIGPIN, LOW); 
+ delayMicroseconds(2); 
+
+ digitalWrite(TRIGPIN, HIGH);
+ delayMicroseconds(10); 
+ 
+ digitalWrite(TRIGPIN, LOW);
+ duration = pulseIn(ECHOPIN, HIGH);
+ 
+ //Calculate the distance (in cm) based on the speed of sound.
+ distance = duration/58.2;
+ 
+ if (distance >= maximumRange || distance <= minimumRange){
+   /* Send a negative number to computer 
+   to indicate "out of range" */
+   Serial.println("-1");
+    
+ }
+ else {
+   /* Send the distance to the computer using Serial protocol */
+   Serial.print("distance: ");
+   Serial.println(distance);
+ 
+   // subtract the last reading:
+  total= total - readings[index];         
+  // read from the sensor:  
+  readings[index] = distance; 
+  // add the reading to the total:
+  total= total + readings[index];       
+  // advance to the next position in the array:  
+  index = index + 1;                                               
+
+  // calculate the average:
+  average = total / numReadings;         
+  // send it to the computer as ASCII digits
+  Serial.print("average: ");
+  Serial.println(average);
+   
+   if (average < outputLimit && index == numReadings) {
+     /* if calculated average is below the threshold, turn on the LED and output signal high to edison */
+     digitalWrite(LEDPIN, HIGH);
+     Serial.print("[Send] ");
+     Serial.println("Your dumpstr is getting full!");
+     ble.print("AT+BLEUARTTX=");
+     ble.println("Your dumpstr is getting full!");
+     
+   }
+   
+   // if we're at the end of the array...
+   if (index >= numReadings) {              
+     // ...wrap around to the beginning: 
+     index = 0;
+   }
+ }
+  /*
+  // test msg every 1 second
   Serial.print("[Send] ");
   Serial.println("test message from dumpstr");
   ble.print("AT+BLEUARTTX=");
   ble.println("test message from dumpstr");
+  */
+  
+  // Check for user input
+  char inputs[BUFSIZE+1];
 
   if ( getUserInput(inputs, BUFSIZE) )
   {
@@ -186,8 +278,8 @@ void loop(void)
   Serial.print(F("[Recv] ")); Serial.println(ble.buffer);
   ble.waitForOK();
   
-  // #added
-  delay(1000);
+  //Delay 50ms before next reading.
+ delay(50);
 }
 
 /**************************************************************************/

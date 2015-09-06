@@ -13,22 +13,10 @@
  And modified further by Dumpstr for PennApps Fall 2015 here: https://github.com/pgebhard/PennAppsFall2015 on 04 to 06 Sep 2015
  */
  
- /* to use for spi bluetooth comm
- /* ...hardware SPI, using SCK/MOSI/MISO hardware SPI pins and then user selected CS/IRQ/RST */
-Adafruit_BluefruitLE_SPI ble(BLUEFRUIT_SPI_CS, BLUEFRUIT_SPI_IRQ, BLUEFRUIT_SPI_RST);
-*/
-
-
 #define ECHOPIN              2 // HC-SR04 Echo Pin
 #define TRIGPIN              4 // HC-SR04 Trigger Pin
 #define LEDPIN              13 // Onboard LED
 //#define outputPin 2 // Output to trigger interrupt on Intel Edison board
-#define BLUEFRUIT_SPI_CS     8 // SPI chip select
-#define BLUEFRUIT_SPI_IRQ    7 // SPI nRF51 -> Arduino 'interrupt'when data is available on the nRF51, indicating that a new SPI transaction should be initiated by the Arduino/MCU
-#define BLUEFRUIT_SPI_RST    6 // SPI reset
-#define BLUEFRUIT_SPI_SCK   13 // SPI serial clock
-#define BLUEFRUIT_SPI_MISO  12 // SPI Master In Slave Out (nRF51 -> Arduino communication)
-#define BLUEFRUIT_SPI_MOSI  11 // SPI Master Out Slave In (Arduino -> nRF51 communication)
 #define outputLimit         10 // limit to trigger output 
 
 const int numReadings = 40; // with 50ms delays between readings, will detect objects within 2 seconds
