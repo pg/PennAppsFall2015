@@ -26,12 +26,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         self.trashStatusLabel.layer.borderWidth = 1.5
-        
         let defaults = NSUserDefaults.standardUserDefaults()
-        
         if defaults.arrayForKey("PennAppsKey") == nil {
+            newArray()
+        }
+    }
+    
+    @IBAction func onTouch(sender: AnyObject) {
+        newArray()
+    }
+    
+    func newArray(){
+        dispatch_async(dispatch_get_main_queue()) {
+            self.trashStatusLabel.text = "🚮 Trash is Not Full! 🚮"
+            let defaults = NSUserDefaults.standardUserDefaults()
             let dateArray = []
             defaults.setObject(dateArray, forKey: "PennAppsKey")
+            self.tableView?.reloadData()
         }
     }
     
